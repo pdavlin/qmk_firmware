@@ -1,2 +1,2 @@
-DEFAULT_FOLDER = sofle/rev1
+DEFAULT_FOLDER = pdavlin/sofle/rev1
 BOOTLOADER = atmel-dfu
