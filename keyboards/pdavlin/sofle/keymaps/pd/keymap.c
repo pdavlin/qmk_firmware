@@ -36,13 +36,17 @@
         35 + 30, 2, hsv                                                                                                \
     }
 
-#define SET_LAYER_ID(hsv)                                                           \
-    {0, 8, hsv}, {16, 2, hsv}, {26, 1, hsv}, {35 + 0, 8, hsv}, {35 + 16, 2, hsv}, { \
-        35 + 26, 1, hsv                                                             \
+// #define SET_LAYER_ID(hsv) {0, 6, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, {6, 2, hsv}, {16, 2, hsv}, {26, 1, hsv}, {35 + 0, 6, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, {35 + 6, 2, hsv}, {35 + 16, 2, hsv}, { 35 + 26, 1, hsv }
+
+#define SET_LAYER_ID(hsv)                                       \
+    {0, 6, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, {     \
+        35 + 0, 6, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS) \
     }
 
-#define SET_ESDF_ID(hsv) \
-    {14,1,hsv}, {19,2,hsv},{24,1,hsv}
+#define SET_ESDF_ID(hsv)          \
+    {14, 1, hsv}, {19, 2, hsv}, { \
+        24, 1, hsv                \
+    }
 
 enum sofle_layers { _DEFAULTS = 0, _QWERTY = 0, _COLEMAK, _COLEMAKDH, _LOWER, _RAISE, _ADJUST, _NUMPAD, _SWITCH };
 
