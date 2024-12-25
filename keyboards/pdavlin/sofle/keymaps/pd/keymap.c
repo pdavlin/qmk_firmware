@@ -25,6 +25,8 @@
 #define HSV_OVERRIDE(hsv, Override) HSV_OVERRIDE_HELP(hsv, Override)
 
 // Light combinations
+// notes on lights: underglow is 0-6, thumb keys are 7-8, then sequentially snakes up and down from there by column up to 35
+// in order to set lights on non-master keyboard half, add 35
 #define SET_NUMPAD(hsv)  \
     {35 + 13, 8, hsv}, { \
         35 + 23, 3, hsv  \
