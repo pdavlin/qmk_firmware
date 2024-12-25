@@ -25,14 +25,8 @@
 #define HSV_OVERRIDE(hsv, Override) HSV_OVERRIDE_HELP(hsv, Override)
 
 // Light combinations
-#define SET_INDICATORS(hsv)                                 \
-    {0, 1, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, { \
-        35 + 0, 1, hsv                                      \
-    }
-#define SET_UNDERGLOW(hsv) \
-    {1, 6, hsv}, {         \
-        35 + 1, 6, hsv     \
-    }
+#define SET_INDICATORS(hsv) {0, 1, hsv}
+#define SET_UNDERGLOW(hsv) {0, 6, hsv}, {35 + 0, 6, hsv}
 #define SET_NUMPAD(hsv)                     \
     {35 + 15, 5, hsv}, {35 + 22, 3, hsv}, { \
         35 + 27, 3, hsv                     \
@@ -54,10 +48,7 @@
     {25, 2, hsv}, {            \
         35 + 25, 2, hsv        \
     }
-#define SET_LAYER_ID(hsv)                                                                                                                                                                          \
-    {0, 1, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, {35 + 0, 1, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS)}, {1, 6, hsv}, {35 + 1, 6, hsv}, {7, 4, hsv}, {35 + 7, 4, hsv}, {25, 2, hsv}, { \
-        35 + 25, 2, hsv                                                                                                                                                                            \
-    }
+#define SET_LAYER_ID(hsv) {0, 7, hsv}, {35 + 0, 7, hsv}
 
 enum sofle_layers { _DEFAULTS = 0, _QWERTY = 0, _COLEMAK, _COLEMAKDH, _LOWER, _RAISE, _ADJUST, _NUMPAD, _SWITCH };
 
@@ -259,7 +250,7 @@ const rgblight_segment_t PROGMEM layer_symbol_lights[] = RGBLIGHT_LAYER_SEGMENTS
 const rgblight_segment_t PROGMEM layer_command_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_PURPLE));
 
 //_NUMPAD
-const rgblight_segment_t PROGMEM layer_numpad_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_INDICATORS(HSV_ORANGE), SET_UNDERGLOW(HSV_ORANGE), SET_NUMPAD(HSV_BLUE), {7, 4, HSV_ORANGE}, {25, 2, HSV_ORANGE}, {35 + 6, 4, HSV_ORANGE}, {35 + 25, 2, HSV_ORANGE});
+const rgblight_segment_t PROGMEM layer_numpad_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_ORANGE), SET_NUMPAD(HSV_BLUE));
 // _SWITCHER   // light up top row
 const rgblight_segment_t PROGMEM layer_switcher_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_GREEN), SET_NUMROW(HSV_GREEN));
 
