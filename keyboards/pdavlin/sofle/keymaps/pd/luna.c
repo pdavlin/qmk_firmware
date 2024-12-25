@@ -227,6 +227,12 @@ static void print_status_narrow(void) {
         case _ADJUST:
             oled_write("Adj  ", false);
             break;
+        case _SWITCH:
+            oled_write("Swtch", false);
+            break;
+        case _NUMPAD:
+            oled_write("Numpd", false);
+            break;
         default:
             oled_write("Undef", false);
     }
