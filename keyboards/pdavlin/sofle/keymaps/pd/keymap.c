@@ -25,19 +25,22 @@
 #define HSV_OVERRIDE(hsv, Override) HSV_OVERRIDE_HELP(hsv, Override)
 
 // Light combinations
-#define SET_NUMPAD(hsv)                     \
+#define SET_NUMPAD(hsv)  \
     {35 + 13, 8, hsv}, { \
-        35 + 23, 3, hsv                     \
+        35 + 23, 3, hsv  \
     }
 #define SET_NUMROW(hsv)                                                                                                \
     {11, 1, hsv}, {12, 1, hsv}, {21, 2, hsv}, {30, 2, hsv}, {35 + 11, 1, hsv}, {35 + 12, 1, hsv}, {35 + 21, 2, hsv}, { \
         35 + 30, 2, hsv                                                                                                \
     }
 
-#define SET_LAYER_ID(hsv) \
-    {0, 7, hsv}, {        \
-        35 + 0, 7, hsv    \
+#define SET_LAYER_ID(hsv)                                                           \
+    {0, 8, hsv}, {16, 2, hsv}, {26, 1, hsv}, {35 + 0, 8, hsv}, {35 + 16, 2, hsv}, { \
+        35 + 26, 1, hsv                                                             \
     }
+
+#define SET_ESDF_ID(hsv) \
+    {14,1,hsv}, {19,2,hsv},{24,1,hsv}
 
 enum sofle_layers { _DEFAULTS = 0, _QWERTY = 0, _COLEMAK, _COLEMAKDH, _LOWER, _RAISE, _ADJUST, _NUMPAD, _SWITCH };
 
