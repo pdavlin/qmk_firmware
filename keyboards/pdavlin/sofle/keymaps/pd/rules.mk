@@ -1,4 +1,4 @@
-MOUSEKEY_ENABLE = no			# Mouse keys (+1482). Not required for trackball usage.
+MOUSEKEY_ENABLE = yes			# Mouse keys (+1482). Not required for trackball usage.
 EXTRAKEY_ENABLE = yes			# Audio control and System control (+450)
 CONSOLE_ENABLE = no				# Console for debug (+4686)
 RGBLIGHT_ENABLE = yes			# RGB lighting (+3826)
