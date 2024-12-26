@@ -43,7 +43,7 @@
         35 + 0, 6, HSV_OVERRIDE_HELP(hsv, INDICATOR_BRIGHTNESS) \
     }
 
-#define SET_ESDF_ID(hsv)          \
+#define SET_ESDF(hsv)          \
     {14, 1, hsv}, {19, 2, hsv}, { \
         24, 1, hsv                \
     }
@@ -260,7 +260,7 @@ char layer_state_str[70];
 const rgblight_segment_t PROGMEM layer_qwerty_lights[]    = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_RED)
 
    );
-const rgblight_segment_t PROGMEM layer_colemakdh_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_PINK));
+const rgblight_segment_t PROGMEM layer_gaming_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_TURQUOISE), SET_ESDF(HSV_TURQUOISE));
 
 // _NUM,
 // Light on outer column and underglow
@@ -287,7 +287,7 @@ const rgblight_segment_t *const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     layer_num_lights, // overrides layer 1
     layer_symbol_lights, layer_command_lights, layer_numpad_lights,
     layer_switcher_lights, // Overrides other layers
-    layer_colemakdh_lights);
+    layer_gaming_lights);
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(0, layer_state_cmp(state, _DEFAULTS) && layer_state_cmp(default_layer_state, _QWERTY));
@@ -297,6 +297,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(3, layer_state_cmp(state, _ADJUST));
     rgblight_set_layer_state(4, layer_state_cmp(state, _NUMPAD));
     rgblight_set_layer_state(5, layer_state_cmp(state, _SWITCH));
+    rgblight_set_layer_state(6, layer_state_cmp(state, _GAMING));
     return state;
 }
 void keyboard_post_init_user(void) {
