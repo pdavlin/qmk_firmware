@@ -232,6 +232,9 @@ static void print_status_narrow(void) {
     /* caps lock */
     oled_set_cursor(0, 8);
     oled_write("CPSLK", led_usb_state.caps_lock);
+    oled_write("NUMLK", led_usb_state.num_lock);
+    oled_write("SCRLK", led_usb_state.scroll_lock);
+
 
     /* KEYBOARD PET RENDER START */
 
