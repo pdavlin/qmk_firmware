@@ -185,9 +185,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
         QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
-        UG_TOGG, UG_HUEU, UG_SATU, UG_VALU, XXXXXXX, KC_COLEMAK,               C(G(KC_LEFT)), XXXXXXX, XXXXXXX, C(G(KC_RGHT)), XXXXXXX, XXXXXXX,
+        UG_TOGG, UG_HUEU, UG_SATU, UG_VALU, XXXXXXX, XXXXXXX,              C(G(KC_LEFT)), XXXXXXX, XXXXXXX, C(G(KC_RGHT)), XXXXXXX, XXXXXXX,
         //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
-        UG_NEXT, UG_HUED, UG_SATD, UG_VALD, XXXXXXX, KC_QWERTY, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
+        UG_NEXT, UG_HUED, UG_SATD, UG_VALD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
         //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
         //            \--------+--------+--------+---------+-------|   |--------+---------+--------+---------+-------/
