@@ -50,7 +50,7 @@
 
 enum sofle_layers { _DEFAULTS = 0, _QWERTY = 0, _GAMING, _LOWER, _RAISE, _ADJUST, _NUMPAD, _SWITCH };
 
-enum custom_keycodes { KC_QWERTY = SAFE_RANGE, KC_COLEMAK, KC_LOWER, KC_RAISE, KC_ADJUST, KC_D_MUTE };
+enum custom_keycodes { KC_QWERTY = SAFE_RANGE, KC_LOWER, KC_RAISE, KC_ADJUST, KC_D_MUTE };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
@@ -101,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //,------------------------------------------------.                    ,---------------------------------------------------.
            KC_ESC,  KC_1,   KC_2,    KC_3,   KC_4,    KC_5,            LT(_SWITCH, KC_6), KC_7,    KC_8,    KC_9,     KC_0,  KC_GRV,
         //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
-        LT(_NUMPAD, KC_TAB), KC_Q, KC_W, KC_E, KC_R,  KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,   KC_BSPC,
+           KC_TAB,  KC_Q,   KC_W,    KC_E,   KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,   KC_BSPC,
         //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
           KC_LCTL, KC_A,   KC_S,     KC_D,    KC_F,   KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT,
         //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
@@ -260,7 +260,7 @@ char layer_state_str[70];
 const rgblight_segment_t PROGMEM layer_qwerty_lights[]    = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_RED)
 
    );
-const rgblight_segment_t PROGMEM layer_gaming_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_GREEN), SET_ESDF(HSV_GREEN));
+const rgblight_segment_t PROGMEM layer_gaming_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_MAGENTA), SET_ESDF(HSV_MAGENTA));
 
 // _NUM,
 // Light on outer column and underglow
@@ -279,15 +279,16 @@ const rgblight_segment_t PROGMEM layer_command_lights[] = RGBLIGHT_LAYER_SEGMENT
 //_NUMPAD
 const rgblight_segment_t PROGMEM layer_numpad_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_ORANGE), SET_NUMPAD(HSV_BLUE));
 // _SWITCHER   // light up top row
-const rgblight_segment_t PROGMEM layer_switcher_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_MAGENTA), SET_NUMROW(HSV_MAGENTA));
+const rgblight_segment_t PROGMEM layer_switcher_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_GREEN), SET_NUMROW(HSV_GREEN));
 
 const rgblight_segment_t *const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
 
     layer_qwerty_lights,
     layer_num_lights, // overrides layer 1
     layer_symbol_lights, layer_command_lights, layer_numpad_lights,
-    layer_switcher_lights, // Overrides other layers
-    layer_gaming_lights);
+    layer_gaming_lights,
+    layer_switcher_lights // Overrides other layers
+    );
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(0, layer_state_cmp(state, _DEFAULTS) && layer_state_cmp(default_layer_state, _QWERTY));
@@ -296,8 +297,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(2, layer_state_cmp(state, _RAISE));
     rgblight_set_layer_state(3, layer_state_cmp(state, _ADJUST));
     rgblight_set_layer_state(4, layer_state_cmp(state, _NUMPAD));
-    rgblight_set_layer_state(5, layer_state_cmp(state, _SWITCH));
-    rgblight_set_layer_state(6, layer_state_cmp(state, _GAMING));
+    rgblight_set_layer_state(5, layer_state_cmp(state, _GAMING));
+    rgblight_set_layer_state(6, layer_state_cmp(state, _SWITCH));
     return state;
 }
 void keyboard_post_init_user(void) {
