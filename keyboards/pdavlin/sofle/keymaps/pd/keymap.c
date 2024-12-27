@@ -176,7 +176,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * | mode | hue dn|sat d|bri dn|      |      |-------|    |-------|      | PREV | PLAY | NEXT |      |      |
      * `-----------------------------------------/       /     \      \-----------------------------------------'
      *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
-     *            |      |      |      |      |/       /         \      \ |      |      |      |      |qw
+     *            |      |      |      |      |/       /         \      \ |      |      |      |      |
      *            `----------------------------------'           '------''---------------------------'
      */
     [_ADJUST] = LAYOUT(
