@@ -19,7 +19,7 @@
 
 #include QMK_KEYBOARD_H
 
-#define INDICATOR_BRIGHTNESS 50
+#define INDICATOR_BRIGHTNESS 70
 
 #define HSV_OVERRIDE_HELP(h, s, v, Override) h, s, Override
 #define HSV_OVERRIDE(hsv, Override) HSV_OVERRIDE_HELP(hsv, Override)
@@ -121,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
      * | trans|  =   |  -   |  +   |   {  |   }  |-------|    |-------|   [  |   ]  |   ;  |   :  |   \  | Shift|
      * `-----------------------------------------/       /     \      \-----------------------------------------'
-     *            | Bspc | WIN  |LOWER | Enter| /Space  /       \Enter \  |SPACE |RAISE | RCTR | RAlt |
+     *            | GUI  | LAlt | LCTR | LOWER| /Space  /       \Enter \  |RAISE | RCTR | RAlt |  OS  |
      *            |      |      |      |      |/       /         \      \ |      |      |      |      |
      *            `----------------------------------'           '------''---------------------------'
      */
@@ -222,28 +222,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* SWITCH
      * ,-----------------------------------------.                    ,-----------------------------------------.
-     * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
+     * | ESC  |      |      |      |      |      |                    |      |      |      |      |      |      |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * | qwer | cole |col_dh| low  | raise| adj  |                    |numpad|      |      |      |      |QK_BOOT |
+     * | qwer | game | low  | raise| adj  |numpad|                    |      |      |      |      |      |QK_BOOT |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
      * |      |      |      |      |      |      |-------.    ,-------|      |      |      |      |      |EE_CLR|
-     * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
+     * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
      * | SLEEP|      |      |      |      |      |-------|    |-------|      |      |      |      |      |      |
      * `-----------------------------------------/       /     \      \-----------------------------------------'
-     *            | Bspc | WIN  |LOWER | Enter| /Space  /       \Enter \  |SPACE | 0    |  .   | RAlt |
+     *            |      |      |      |      | /       /       \      \  |      |      |      |      |
      *            |      |      |      |      |/       /         \      \ |      |      |      |      |
      *            `----------------------------------'           '------''---------------------------'
      */
     // layer switcher
     [_SWITCH] = LAYOUT(
         //,------------------------------------------------.                    ,---------------------------------------------------.
-        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
-            TO(0), TO(1),  TO(2),   TO(3),   TO(4),   TO(5),                     TO(6),   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,
+            TO(0), TO(1),  TO(2),   TO(3),   TO(4),   TO(5),                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,
         //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,
         //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
-        KC_SYSTEM_SLEEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        KC_SYSTEM_SLEEP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX
         //            \--------+--------+--------+---------+-------|   |--------+---------+--------+---------+-------/
@@ -260,7 +260,7 @@ char layer_state_str[70];
 const rgblight_segment_t PROGMEM layer_qwerty_lights[]    = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_RED)
 
    );
-const rgblight_segment_t PROGMEM layer_gaming_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_TURQUOISE), SET_ESDF(HSV_TURQUOISE));
+const rgblight_segment_t PROGMEM layer_gaming_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_GREEN), SET_ESDF(HSV_GREEN));
 
 // _NUM,
 // Light on outer column and underglow
@@ -279,7 +279,7 @@ const rgblight_segment_t PROGMEM layer_command_lights[] = RGBLIGHT_LAYER_SEGMENT
 //_NUMPAD
 const rgblight_segment_t PROGMEM layer_numpad_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_ORANGE), SET_NUMPAD(HSV_BLUE));
 // _SWITCHER   // light up top row
-const rgblight_segment_t PROGMEM layer_switcher_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_GREEN), SET_NUMROW(HSV_GREEN));
+const rgblight_segment_t PROGMEM layer_switcher_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_MAGENTA), SET_NUMROW(HSV_MAGENTA));
 
 const rgblight_segment_t *const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
 
@@ -383,10 +383,10 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else if (index == 1) {
         if (clockwise) {
-            tap_code(MS_WHLU);
+            tap_code(MS_WHLD);
 
         } else {
-            tap_code(MS_WHLD);
+            tap_code(MS_WHLU);
         }
     }
     return false;
