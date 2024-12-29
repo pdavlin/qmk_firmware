@@ -173,22 +173,22 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
 
 static void print_logo_narrow(void) {
     // render_logo();
-
-    // /* wpm counter */
-    // uint8_t n = get_current_wpm();
-    // char    wpm_str[4];
-    // oled_set_cursor(0, 14);
-    // wpm_str[3] = '\0';
-    // wpm_str[2] = '0' + n % 10;
-    // wpm_str[1] = '0' + (n /= 10) % 10;
-    // wpm_str[0] = '0' + n / 10;
-    // oled_write(wpm_str, false);
-
-    // oled_set_cursor(0, 15);
-    // oled_write(" wpm", false);
     oled_set_cursor(0, 2);
     oled_write("pdav ", false);
     oled_write("types", false);
+
+    // /* wpm counter */
+    uint8_t n = get_current_wpm();
+    char    wpm_str[4];
+    oled_set_cursor(0, 14);
+    wpm_str[3] = '\0';
+    wpm_str[2] = '0' + n % 10;
+    wpm_str[1] = '0' + (n /= 10) % 10;
+    wpm_str[0] = '0' + n / 10;
+    oled_write(wpm_str, false);
+
+    oled_set_cursor(0, 15);
+    oled_write(" wpm", false);
 }
 
 static void print_status_narrow(void) {
