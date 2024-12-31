@@ -1,5 +1,6 @@
 
 /* Copyright 2021 Dane Evans
+ * Modified 2024 by Patrick Davlin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -310,7 +311,7 @@ void keyboard_post_init_user(void) {
 #endif
 
 #ifdef OLED_ENABLE
-    #include "luna.c" //OLED code for Luna, original code by Hellsingcoder and adapted by Jackasaur.
+    #include "luna.c" //OLED code for Luna, original code by Hellsingcoder and adapted by Jackasaur and pdavlin.
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {

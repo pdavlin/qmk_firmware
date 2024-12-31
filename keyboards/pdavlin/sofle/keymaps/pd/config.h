@@ -1,4 +1,5 @@
  /* Copyright 2021 Dane Evans
+  * Modified 2024 by Patrick Davlin
   *
   * This program is free software: you can redistribute it and/or modify
   * it under the terms of the GNU General Public License as published by
