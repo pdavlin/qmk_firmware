@@ -107,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
           KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,   KC_B, KC_MUTE,  KC_D_MUTE, KC_N,    KC_M,   KC_COMM, KC_DOT, KC_SLSH,  KC_LSFT,
         //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
-                        KC_LGUI, KC_LALT, KC_LCTL, KC_SCRL, KC_SPC,      KC_ENT, KC_RAISE, KC_RCTL, KC_RALT, KC_RGUI
+                        KC_LGUI, KC_LALT, KC_LCTL, KC_SCRL, KC_SPC,      KC_ENT, KC_LOWER, KC_RAISE, KC_RALT, KC_RGUI
         //            \--------+--------+--------+---------+-------|   |--------+---------+--------+---------+-------/
         ),
 
@@ -293,11 +293,11 @@ const rgblight_segment_t *const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
 layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(0, layer_state_cmp(state, _DEFAULTS) && layer_state_cmp(default_layer_state, _QWERTY));
 
+    rgblight_set_layer_state(5, layer_state_cmp(state, _GAMING));
     rgblight_set_layer_state(1, layer_state_cmp(state, _LOWER));
     rgblight_set_layer_state(2, layer_state_cmp(state, _RAISE));
     rgblight_set_layer_state(3, layer_state_cmp(state, _ADJUST));
     rgblight_set_layer_state(4, layer_state_cmp(state, _NUMPAD));
-    rgblight_set_layer_state(5, layer_state_cmp(state, _GAMING));
     rgblight_set_layer_state(6, layer_state_cmp(state, _SWITCH));
     return state;
 }
