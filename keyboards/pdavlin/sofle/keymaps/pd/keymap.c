@@ -50,7 +50,7 @@
 
 enum sofle_layers { _DEFAULTS = 0, _QWERTY = 0, _GAMING, _LOWER, _RAISE, _ADJUST, _NUMPAD, _SWITCH };
 
-enum custom_keycodes { KC_QWERTY = SAFE_RANGE, KC_LOWER, KC_RAISE, KC_ADJUST, KC_D_MUTE };
+enum custom_keycodes { KC_LOWER, KC_RAISE, KC_ADJUST, KC_D_MUTE };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
@@ -315,11 +315,6 @@ void keyboard_post_init_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case KC_QWERTY:
-            if (record->event.pressed) {
-                set_single_persistent_default_layer(_QWERTY);
-            }
-            return false;
         case KC_LOWER:
             if (record->event.pressed) {
                 layer_on(_LOWER);
