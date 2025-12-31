@@ -23,6 +23,10 @@
         "serial": {
             "pin": "D2"
         },
+        "usb_detect": {
+            "enabled": true,
+            "timeout": 2000
+        },
         "transport": {
             "sync": {
                 "matrix_state": true

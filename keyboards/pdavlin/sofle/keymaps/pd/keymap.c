@@ -132,9 +132,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
            KC_GRV, KC_1,    KC_2,    KC_3,    KC_4,   KC_5,                     KC_HOME, KC_PGUP, KC_UP,   KC_PGDN,  KC_0,   KC_F12,
         //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
-         _______, XXXXXXX,XXXXXXX, XXXXXXX, KC_WH_U,KC_PGUP,                    KC_END,  KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, KC_DEL,
+         _______, XXXXXXX,XXXXXXX, XXXXXXX, MS_WHLU,KC_PGUP,                    KC_END,  KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, KC_DEL,
         //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
-         _______, XXXXXXX,XXXXXXX, XXXXXXX, KC_WH_D,KC_PGDN, _______, _______,  XXXXXXX, XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, _______,
+         _______, XXXXXXX,XXXXXXX, XXXXXXX, MS_WHLD,KC_PGDN, _______, _______,  XXXXXXX, XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, _______,
         //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
                         _______, _______, _______, _______, _______,     _______, _______, _______, _______, _______
         //            \--------+--------+--------+---------+-------|   |--------+---------+--------+---------+-------/
