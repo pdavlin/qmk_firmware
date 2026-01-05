@@ -49,9 +49,14 @@
         24, 1, hsv                \
     }
 
-enum sofle_layers { _DEFAULTS = 0, _QWERTY = 0, _GAMING, _LOWER, _RAISE, _ADJUST, _NUMPAD, _SWITCH };
+enum sofle_layers { _DEFAULTS = 0, _QWERTY = 0, _GAMING, _GAMING_CLICK, _LOWER, _RAISE, _ADJUST, _NUMPAD, _SWITCH };
 
-enum custom_keycodes { KC_LOWER, KC_RAISE, KC_ADJUST, KC_D_MUTE };
+enum custom_keycodes { KC_LOWER = SAFE_RANGE, KC_RAISE, KC_ADJUST, KC_D_MUTE, KC_AUTOCLICK };
+
+// Auto-click state
+static bool autoclick_active = false;
+static uint16_t autoclick_timer = 0;
+#define AUTOCLICK_INTERVAL 50
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
@@ -109,6 +114,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
           KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,   KC_B, KC_MUTE,  KC_D_MUTE, KC_N,    KC_M,   KC_COMM, KC_DOT, KC_SLSH,  KC_LSFT,
         //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
                         KC_LGUI, KC_LALT, KC_LCTL, KC_SCRL, KC_SPC,      KC_ENT, KC_RAISE, KC_LOWER, KC_RALT, KC_RGUI
+        //            \--------+--------+--------+---------+-------|   |--------+---------+--------+---------+-------/
+        ),
+
+        /*
+         * GAMING_CLICK - Gaming layer with auto-click macro
+         * Same as GAMING but KC_SCRL replaced with KC_AUTOCLICK (mouse click every 50ms while held)
+         */
+    [_GAMING_CLICK] = LAYOUT(
+        //,------------------------------------------------.                    ,---------------------------------------------------.
+           KC_ESC,  KC_1,   KC_2,    KC_3,   KC_4,    KC_5,            LT(_SWITCH, KC_6), KC_7,    KC_8,    KC_9,     KC_0,  KC_GRV,
+        //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
+           KC_TAB,  KC_Q,   KC_W,    KC_E,   KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,   KC_BSPC,
+        //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
+          KC_LCTL, KC_A,   KC_S,     KC_D,    KC_F,   KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT,
+        //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
+          KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,   KC_B, KC_MUTE,  KC_D_MUTE, KC_N,    KC_M,   KC_COMM, KC_DOT, KC_SLSH,  KC_LSFT,
+        //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
+                        KC_LGUI, KC_LALT, KC_LCTL, KC_AUTOCLICK, KC_SPC, KC_ENT, KC_RAISE, KC_LOWER, KC_RALT, KC_RGUI
         //            \--------+--------+--------+---------+-------|   |--------+---------+--------+---------+-------/
         ),
 
@@ -240,7 +263,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //,------------------------------------------------.                    ,---------------------------------------------------.
         _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
-            TO(0), TO(1),  TO(2),   TO(3),   TO(4),   TO(5),                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,
+     TO(_QWERTY), TO(_GAMING), TO(_GAMING_CLICK), TO(_LOWER), TO(_RAISE), TO(_NUMPAD), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,
         //|------+-------+--------+--------+--------+------|                   |--------+-------+--------+--------+--------+---------|
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, EE_CLR,
         //|------+-------+--------+--------+--------+------|  ===  |   |  ===  |--------+-------+--------+--------+--------+---------|
@@ -262,6 +285,7 @@ const rgblight_segment_t PROGMEM layer_qwerty_lights[]    = RGBLIGHT_LAYER_SEGME
 
    );
 const rgblight_segment_t PROGMEM layer_gaming_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_MAGENTA), SET_ESDF(HSV_MAGENTA));
+const rgblight_segment_t PROGMEM layer_gaming_click_lights[] = RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_CYAN), SET_ESDF(HSV_CYAN));
 
 // _NUM,
 // Light on outer column and underglow
@@ -288,6 +312,7 @@ const rgblight_segment_t *const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
     layer_num_lights, // overrides layer 1
     layer_symbol_lights, layer_command_lights, layer_numpad_lights,
     layer_gaming_lights,
+    layer_gaming_click_lights,
     layer_switcher_lights // Overrides other layers
     );
 
@@ -295,11 +320,12 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(0, layer_state_cmp(state, _DEFAULTS) && layer_state_cmp(default_layer_state, _QWERTY));
 
     rgblight_set_layer_state(5, layer_state_cmp(state, _GAMING));
+    rgblight_set_layer_state(6, layer_state_cmp(state, _GAMING_CLICK));
     rgblight_set_layer_state(1, layer_state_cmp(state, _LOWER));
     rgblight_set_layer_state(2, layer_state_cmp(state, _RAISE));
     rgblight_set_layer_state(3, layer_state_cmp(state, _ADJUST));
     rgblight_set_layer_state(4, layer_state_cmp(state, _NUMPAD));
-    rgblight_set_layer_state(6, layer_state_cmp(state, _SWITCH));
+    rgblight_set_layer_state(7, layer_state_cmp(state, _SWITCH));
     return state;
 }
 void keyboard_post_init_user(void) {
@@ -349,6 +375,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_mods(mod_config(MOD_MEH));
                 unregister_code(KC_UP);
             }
+            break;
+        case KC_AUTOCLICK:
+            if (record->event.pressed) {
+                autoclick_active = true;
+                autoclick_timer = timer_read();
+                tap_code(MS_BTN1);
+            } else {
+                autoclick_active = false;
+            }
+            return false;
         case KC_LCTL:
         case KC_RCTL:
             if (record->event.pressed) {
@@ -390,3 +426,10 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 }
 
 #endif
+
+void matrix_scan_user(void) {
+    if (autoclick_active && timer_elapsed(autoclick_timer) >= AUTOCLICK_INTERVAL) {
+        tap_code(MS_BTN1);
+        autoclick_timer = timer_read();
+    }
+}

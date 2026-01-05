@@ -160,7 +160,17 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
 /* KEYBOARD PET END */
 
 static void print_logo_narrow(void) {
-    // render_logo();
+    static bool first_run = true;
+    if (first_run) {
+        // Clear raw pixel data with zeros
+        static const char PROGMEM zeros[32] = {0};
+        for (uint8_t row = 0; row < 16; row++) {
+            oled_set_cursor(0, row);
+            oled_write_raw_P(zeros, 32);
+        }
+        first_run = false;
+    }
+
     oled_set_cursor(0, 2);
     oled_write("pdav ", false);
     oled_write("types", false);
@@ -198,6 +208,9 @@ static void print_status_narrow(void) {
         case _GAMING:
             oled_write("Game ", false);
             break;
+        case _GAMING_CLICK:
+            oled_write("GClck", false);
+            break;
         case _RAISE:
             oled_write("Raise", false);
             break;
@@ -231,7 +244,9 @@ static void print_status_narrow(void) {
     /* KEYBOARD PET RENDER END */
 }
 
-oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_270; }
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    return OLED_ROTATION_270;
+}
 
 bool oled_task_user(void) {
     /* KEYBOARD PET VARIABLES START */
